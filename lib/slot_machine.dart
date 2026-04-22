@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:slot_machine/slot_row.dart';
 
 class SlotMachine extends StatefulWidget {
   const SlotMachine({super.key});
 
   @override
-  State<SlotMachine> createState() => _SlotMachineState();
+  State<SlotMachine> createState() =>
+      _SlotMachineState();
 }
-class _SlotMachineState extends State<SlotMachine>{
+
+class _SlotMachineState
+    extends State<SlotMachine> {
   final _random = Random();
   final _symbols = [
     'assets/images/cherry.png',
@@ -21,18 +25,27 @@ class _SlotMachineState extends State<SlotMachine>{
   var _slot3 = 'assets/images/seven.png';
   var _message = '';
 
-  void _spin(){
-    if (_coins <= 0){
+  void _spin() {
+    if (_coins <= 0) {
       setState(() {
         _message = 'Монеты закончились! 😭';
       });
       return;
     }
     setState(() {
-      _slot1 = _symbols[_random.nextInt(_symbols.length)];
-      _slot2 = _symbols[_random.nextInt(_symbols.length)];
-      _slot3 = _symbols[_random.nextInt(_symbols.length)];
-      if (_slot1 == _slot2 && _slot2 == _slot3){
+      _slot1 =
+          _symbols[_random.nextInt(
+            _symbols.length,
+          )];
+      _slot2 =
+          _symbols[_random.nextInt(
+            _symbols.length,
+          )];
+      _slot3 =
+          _symbols[_random.nextInt(
+            _symbols.length,
+          )];
+      if (_slot1 == _slot2 && _slot2 == _slot3) {
         _coins += 3;
         _message = 'Победа! 🎉 +3 монеты';
       } else {
@@ -41,6 +54,7 @@ class _SlotMachineState extends State<SlotMachine>{
       }
     });
   }
+
   void _reset() {
     setState(() {
       _coins = 10;
@@ -50,8 +64,9 @@ class _SlotMachineState extends State<SlotMachine>{
       _message = '';
     });
   }
+
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -63,16 +78,11 @@ class _SlotMachineState extends State<SlotMachine>{
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 40,),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(_slot1, width: 100, height: 100),
-            SizedBox(width: 16),
-            Image.asset(_slot1,width: 100,height: 100),
-            SizedBox(width: 16),
-            Image.asset(_slot3,width: 100, height: 100),
-          ],
+        SizedBox(height: 40),
+        SlotRow(
+          slot1: _slot1,
+          slot2: _slot2,
+          slot3: _slot3,
         ),
         SizedBox(height: 24),
         Text(
