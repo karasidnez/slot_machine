@@ -55,6 +55,7 @@ class _SlotMachineState
 
   Future<void> _spin() async {
     if (_coins <= 0 || _isSpinning) return;
+    await SoundService.playClick();
     SoundService.playClick();
     setState(() {
       _isSpinning = true;
@@ -79,30 +80,32 @@ class _SlotMachineState
       onTick: (val) =>
           setState(() => _slot1 = val),
     );
-    await Future.delayed(
-      Duration(milliseconds: 300),
-    );
+    await Future.delayed(Duration(milliseconds: 300));
+    
+    String newMessage;
+    int coinsChange;
+    if (result1 == result2 && result2 == result3){
+      if (result1 == 'assets/images/seven.png'){
+        coinsChange = 10;
+        newMessage = 'ДЖЕКПОТ!🎰🎰🎰+10 монет';
+        await SoundService.playJackpot();
+      } else {
+        coinsChange = 3;
+        newMessage = 'Победа! 🎆 +3 монеты';
+        await SoundService.playWin();
+      }
+    } else {
+      coinsChange = -1;
+      newMessage = 'Попробуй ещё раз ☹ -1 монета';
+      await SoundService.playLose();
+    }
     setState(() {
       _isSpinning = false;
-      if (result1 == result2 &&
-          result2 == result3) {
-        if (result1 ==
-            'assets/images/seven.png') {
-          _coins += 10;
-          _message = 'ДЖЕКПОТ! 🎰🎰🎰 + 10 монет';
-          SoundService.playJackpot();
-        } else {
-          _coins += 3;
-          _message = 'Победа! 🎆 +3 монеты';
-          SoundService.playWin();
-        }
-      } else {
-        _coins -= 1;
-        _message =
-            'Попоробуй ещё раз ☹ -1 монета';
-        SoundService.playLose();
-      }
+      _coins += coinsChange;
+      _message = newMessage;
+
     });
+    
   }
 
   void _reset() {
