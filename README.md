@@ -1,17 +1,61 @@
-# slot_machine
+# Slot Machine
 
-A new Flutter project.
+Приложение «Слот-машина» на Flutter с анимацией барабанов, звуковыми эффектами и фоновой музыкой.  
+Создано в рамках лабораторной работы №6-№7.
 
-## Getting Started
+## Скриншоты
 
-This project is a starting point for a Flutter application.
+| Главный экран | Победа | Нет монет |
+|---------------|--------|-----------|
+| ![Main Screen](img/step3_Timonin.png) | ![Win](img/win.png) | ![No Coins](img/step4_Timonin.png) |
 
-A few resources to get you started if this is your first Flutter project:
+## Как играть
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+* Нажмите **КРУТИТЬ**, чтобы запустить барабаны.
+* Три одинаковых символа — победа (+3 монеты).
+* Три семёрки — джекпот (+10 монет).
+* Разные символы — проигрыш (–1 монета).
+* Закончились монеты? Нажмите **Начать заново**.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Запуск проекта
+
+**Требования:** Flutter 3.x, Dart 3.x
+
+```bash
+# Клонировать репозиторий
+git clone https://github.com/your-username/slot_machine.git
+
+# Перейти в папку проекта
+cd slot_machine
+
+# Установить зависимости
+flutter pub get
+
+# Запустить в браузере
+flutter run -d chrome
+```
+
+## Установка на Android
+
+Готовый APK-файл доступен для скачивания: app-release.apk
+
+## Технологии
+
+* Flutter 3.x
+* Dart 3.x
+* Платформы: Web, Android
+* Звук: пакет audioplayers (Web и Android), пул плееров для звуковых эффектов
+
+## Что изучено
+
+* Генерация случайных чисел через dart:math
+* Асинхронная анимация с async/await и AnimatedOpacity
+* Подключение и воспроизведение звуков: сначала через Web Audio API, затем кроссплатформенно через audioplayers
+* Сборка  для Android 
+
+
+## Автор
+
+Тимонин И.В.
+Группа ИСП-233
+Лабораторная работа №6-№7, 2026
